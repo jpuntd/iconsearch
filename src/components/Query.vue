@@ -26,7 +26,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .query input {
-  background-color: transparent;
+  background-color: black;
   border: 2px solid white;
   border-radius: 5px;
   color: whitesmoke;
@@ -34,7 +34,7 @@ export default {
   font-weight: 100;
   letter-spacing: 2px;
   outline: none;
-  opacity: 1;
+  opacity: 0.5;
   position: relative;
   padding: 15px 40px 15px 20px;
   width: 400px;

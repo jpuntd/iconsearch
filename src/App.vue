@@ -2,7 +2,10 @@
   <div id="app">
     <Query @submitquery="search"></Query>
     <Results :results="results"></Results>
-    <aside>Background image by Sebastian Herrmann on Unsplash. Synonym lookup provided by <a href="thesaurus.altervista.org">thesaurus.altervista.org</a></aside>
+    <aside>
+      Background image by Sebastian Herrmann on Unsplash. Synonym lookup provided by
+      <a href="thesaurus.altervista.org">thesaurus.altervista.org</a>
+    </aside>
   </div>
 </template>
 
@@ -11,7 +14,17 @@ import Query from "./components/Query.vue";
 import Results from "./components/Results.vue";
 import emojimap from "../emojimap.json";
 import axios from "axios";
-import {key} from "../env"
+
+import { key } from "../env";
+const url = "https://thesaurus.altervista.org/thesaurus/v1";
+
+/* parameters:
+key	  	  String that uniquely identifies your application. 
+word	    (urlencoded string)
+language	cs_CZ, da_DK, de_CH, de_DE, en_US, el_GR, es_ES, fr_FR, hu_HU, it_IT, no_NO, pl_PL, pt_PT, ro_RO, ru_RU, sk_SK
+output	  xml or json
+callback	javascript callback function (requires output=json)
+*/
 
 const split_synonyms = answer =>
   answer.response
@@ -35,8 +48,14 @@ export default {
           icons: emojimap[word] || "�",
           active: true
         });
-        axios("http://thesaurus.altervista.org/thesaurus/v1", 
-          { params: { key, language: 'en_US', output: 'json', word: encodeURI(word)} })
+        axios(url, {
+          params: {
+            key,
+            language: "en_US",
+            output: "json",
+            word: encodeURI(word)
+          }
+        })
           .then(res => {
             split_synonyms(res.data).forEach(synonym => {
               let icons = emojimap[synonym];
@@ -84,5 +103,9 @@ aside {
 }
 aside a {
   color: inherit;
+}
+html {
+    height: 100vh; /* set viewport constraint */
+    min-height: 100%; /* enforce height */
 }
 </style>

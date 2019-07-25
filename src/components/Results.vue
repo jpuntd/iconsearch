@@ -24,6 +24,8 @@ export default {
 ul {
     display: flex;
     flex-flow: row wrap;
+    justify-content: flex-start;
+
 }
 li {
     background: whitesmoke;
@@ -32,7 +34,7 @@ li {
     list-style: none;
     flex-direction: column;
     justify-content: space-between;
-    margin: 20px;
+    margin: 10px;
     opacity: 0.9;
     padding: 10px 20px;
 }
